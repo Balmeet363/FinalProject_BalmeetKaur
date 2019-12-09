@@ -5,19 +5,20 @@ using System.Web;
 
 namespace Finalproject_BalmeetKaur
 {
+    // creating a class page.cs and two strings  title and welcome quote
     public class page
     {
         private string ptitle;
-        private string pbody;
+        private string pquote;
 
         public string Gettitle()
         {
             return ptitle;
         }
 
-        public string Getbody()
+        public string Getquote()
         {
-            return pbody;
+            return pquote;
         }
 
         public void Settitle(string value)
@@ -25,9 +26,9 @@ namespace Finalproject_BalmeetKaur
             ptitle = value;
             
         }
-        public void Setbody(string value)
+        public void Setquote(string value)
         {
-            pbody = value;
+            pquote = value;
         }
     }
 }

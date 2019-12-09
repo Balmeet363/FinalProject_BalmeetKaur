@@ -19,18 +19,19 @@ namespace Finalproject_BalmeetKaur
             //create connection
             listpages db = new listpages();
 
-            //create a new particular student
+            //create a new particular page
             page new_page = new page();
             //set that student data
+            //setting the title and quote of page
             new_page.Settitle(pagetitle.Text);
-            new_page.Setbody(pagecontent.Text);
+            new_page.Setquote(pagecontent.Text);
 
-            //add the student to the database
-            summary.InnerHtml = pagetitle.Text;
+            //add the page to the database
+            
             db.Addpage(new_page);
 
 
-            //Response.Redirect("ListStudents.aspx");
+            Response.Redirect("Home.aspx");
         }
     }
 }

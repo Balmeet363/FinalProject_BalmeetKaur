@@ -28,22 +28,26 @@ namespace Finalproject_BalmeetKaur
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            
-        }
-        /*protected void FillClassOptions(listpages db)
-        {
-            string query = "select * from page1" ;
+            // I have created a database named listpages and page1 is a table inside it
+            String query = "Select * from page1";
+            var db = new listpages();
             List<Dictionary<String, String>> rs = db.List_Query(query);
-            
             foreach (Dictionary<String, String> row in rs)
-            {  
-                string title = row["pagetitle"];
-                string pid = row["pageid"];
-                ListItem pageoption = new ListItem(title,pid);
-                pageid.Items.Add(pageoption);
+            {
+                pages_list.InnerHtml += "<div class=\"listitem\">";
+                pages.InnerHtml += "<div class=\"listitem\">";
+                string pageid = row["pageid"];
+
+                string pagetitle = row["pagetitle"];
+                pages_list.InnerHtml += "<div class=\"col4\"><a href=\"page.aspx?pageid=" + pageid + "\">" + pagetitle +"</a></div>";
+                pages.InnerHtml += "<a href=\"page.aspx?pageid=" + pageid + "\">" + pagetitle + "</a></div>";
+                pages_list.InnerHtml += "<div class=\"col4last\"><a href=\"edit.aspx?pageid=" + pageid + "\">Edit</a></div>";
+                pages_list.InnerHtml += "<div class=\"col4last\"><a href=\"delete.aspx?pageid=" + pageid + "\">Delete</a></div>";
+                pages_list.InnerHtml += "</div>";
             }
-        }*/
+
+        }
+       
 
         
     }

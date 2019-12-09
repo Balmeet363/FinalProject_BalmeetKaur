@@ -10,7 +10,7 @@
 namespace Finalproject_BalmeetKaur {
     
     
-    public partial class page1 {
+    public partial class edit {
         
         /// <summary>
         /// form1 control.
@@ -22,21 +22,21 @@ namespace Finalproject_BalmeetKaur {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// pageheading control.
+        /// new_title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pageheading;
+        protected global::System.Web.UI.WebControls.TextBox new_title;
         
         /// <summary>
-        /// pagecontent control.
+        /// new_quote control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pagecontent;
+        protected global::System.Web.UI.WebControls.TextBox new_quote;
     }
 }

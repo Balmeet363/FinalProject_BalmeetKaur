@@ -7,6 +7,9 @@ using MySql.Data.MySqlClient;
 using System.Diagnostics;
 namespace Finalproject_BalmeetKaur
 {
+
+    // Creating class named listpages Christine I read pdf later that there should be class named database.cs but i made with named listpages.cs 
+    // and after that it was difficult to change name everywhere
     public class listpages
     {
         private static string User { get { return "root"; } }
@@ -29,14 +32,12 @@ namespace Finalproject_BalmeetKaur
 
         public void Addpage( page new_page)
         {
-            //slightly better way of injecting data into strings
-
+            //getting data into strings as Christine told in class
+            // In database I have  table with column pagetitle and pagebody
             string query = "insert into page1  (pagetitle, pagebody) values ('{0}','{1}')";
-            query = String.Format(query, new_page.Gettitle(), new_page.Getbody());
+            query = String.Format(query, new_page.Gettitle(), new_page.Getquote());
 
-            //This technique is still sensitive to SQL injection
-            //
-
+ 
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
             MySqlCommand cmd = new MySqlCommand(query, Connect);
             try
@@ -47,7 +48,7 @@ namespace Finalproject_BalmeetKaur
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Something went wrong in the AddStudent Method!");
+                Debug.WriteLine("Something went wrong in the AddPage Method!");
                 Debug.WriteLine(ex.ToString());
             }
 
@@ -60,11 +61,6 @@ namespace Finalproject_BalmeetKaur
 
            
             List<Dictionary<String, String>> ResultSet = new List<Dictionary<String, String>>();
-
-            // try{} catch{} will attempt to do everything inside try{}
-            // if an error happens inside try{}, then catch{} will execute instead.
-            // very useful for debugging without the whole program crashing!
-            // this can be easily abused and should be used sparingly.
             try
             {
                 Debug.WriteLine("Connection Initialized...");
@@ -105,6 +101,64 @@ namespace Finalproject_BalmeetKaur
             Debug.WriteLine("Database Connection Terminated.");
 
             return ResultSet;
+        }
+
+
+       //Creating method to delete page
+        public void DeletePage(int pageid)
+        {
+            // delete everything from page1 table pageid matches
+            string removepage = "delete from page1 where pageid ="+pageid;
+            removepage = String.Format(removepage, pageid);
+
+            MySqlConnection Connect = new MySqlConnection(ConnectionString);
+            
+            //This command removes the particular page from the table
+            MySqlCommand cmd_removepage = new MySqlCommand(removepage, Connect);
+            try
+            {
+                //try to execute both commands!
+                Connect.Open();
+              
+                
+                //then delete the main record
+                cmd_removepage.ExecuteNonQuery();
+                Debug.WriteLine("Executed query " + cmd_removepage);
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine("Something went wrong in the delete page Method!");
+                Debug.WriteLine(ex.ToString());
+            }
+
+            Connect.Close();
+        }
+
+        public void UpdatePage(int pageid, page new_page)
+        {
+            // getting data into query and updating respective fields
+            string query = "update page1 set pagetitle='{0}', pagebody='{1}' where pageid="+pageid;
+            query = String.Format(query, new_page.Gettitle(), new_page.Getquote(),pageid);
+         
+
+            MySqlConnection Connect = new MySqlConnection(ConnectionString);
+            MySqlCommand cmd = new MySqlCommand(query, Connect);
+            try
+            {
+
+                Connect.Open();
+                cmd.ExecuteNonQuery();
+                Debug.WriteLine("Executed query " + query);
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine("Something went wrong in the UpdateStudent Method!");
+                Debug.WriteLine(ex.ToString());
+            }
+
+            Connect.Close();
         }
 
     }
